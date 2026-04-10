@@ -1,11 +1,9 @@
 package com.example.Imovel.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class ImovelModel {
@@ -15,8 +13,19 @@ public class ImovelModel {
     public Long id;
 
     public String descricao;
-    public Date dataCompra;
+    public LocalDate dataCompra;
     public String endereco;
+
+    @OneToMany(mappedBy = "imovel", cascade = CascadeType.ALL)
+    private List<ComodoModel> comodos;
+
+    public List<ComodoModel> getComodos() {
+        return comodos;
+    }
+
+    public void setComodos(List<ComodoModel> comodos) {
+        this.comodos = comodos;
+    }
 
     public Long getId() {
         return id;
@@ -30,16 +39,16 @@ public class ImovelModel {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Date getDataCompra() {
+    public LocalDate getDataCompra() {
         return dataCompra;
     }
 
-    public void setDataCompra(Date dataCompra) {
+    public void setDataCompra(LocalDate dataCompra) {
         this.dataCompra = dataCompra;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getEndereco() {

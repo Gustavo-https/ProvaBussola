@@ -13,6 +13,9 @@ public class ImovelService {
     @Autowired
     private ImovelRepository imovelRepository;
 
+    public ImovelModel getImovelbyId(Long id) {
+        return imovelRepository.findById(id).orElse(null);
+    }
     public List<ImovelModel> lista(){
         return imovelRepository.findAll();
     }

@@ -1,9 +1,6 @@
 package com.example.Imovel.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class ComodoModel {
@@ -13,6 +10,18 @@ public class ComodoModel {
     public Long id;
 
     public String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "imovel_id")
+    private ImovelModel imovel;
+
+    public ImovelModel getImovel() {
+        return imovel;
+    }
+
+    public void setImovel(ImovelModel imovel) {
+        this.imovel = imovel;
+    }
 
     public Long getId() {
         return id;

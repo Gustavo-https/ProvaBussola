@@ -9,11 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Imovel")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = " http://localhost:4200")
 public class ImovelController {
 
     @Autowired
     private ImovelService imovelService;
+
 
     @GetMapping
     public List<ImovelModel> listar(){
@@ -22,6 +23,8 @@ public class ImovelController {
 
     @PostMapping
     public ImovelModel salvar(@RequestBody ImovelModel imovel){
+        System.out.println("Imóvel recebido: " + imovel.getDescricao());
+        System.out.println("Comodos recebidos: " + imovel.getComodos());
         return imovelService.salvar(imovel);
     }
 

@@ -1,1 +1,56 @@
-<p>imovel works!</p>
+<form (ngSubmit)="createImovel()">
+  <div>
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" [(ngModel)]="newImovel.descricao" name="descricao" required>
+  </div>
+
+  <div>
+    <label for="endereco">Endereço:</label>
+    <input type="text" id="endereco" [(ngModel)]="newImovel.endereco" name="endereco" required>
+  </div>
+
+  <div>
+    <label for="dataCompra">Data da Compra:</label>
+    <input type="date" id="dataCompra" [(ngModel)]="newImovel.dataCompra" name="dataCompra" required>
+  </div>
+
+  <div>
+    <label>Comodo:</label>
+    <div *ngFor="let comodo of newImovel.comodos; let i = index">
+      <input type="text" [(ngModel)]="newImovel.comodos[i].nome" name="comodo{{i}}" required>
+      <button type="button" (click)="removeComodo(i)">Remover</button>
+    </div>
+    <button type="button" (click)="addComodo()">Adicionar Cômodo</button>
+  </div>
+
+  <button type="submit">Salvar</button>
+</form>
+<hr>
+<h3>Imóveis Cadastrados</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Endereço</th>
+      <th>Data</th>
+      <th>Cômodos</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Use "imoveis" aqui -->
+    <tr *ngFor="let imovel of imoveis">
+      <td>{{ imovel.descricao }}</td>
+      <td>{{ imovel.endereco }}</td>
+      <td>{{ imovel.dataCompra | date:'dd/MM/yyyy' }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let comodo of imovel.comodos">{{ comodo.nome }}</li>
+        </ul>
+      </td>
+      <td>
+        <button type="button" (click)="deleteImovel(imovel.id)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
